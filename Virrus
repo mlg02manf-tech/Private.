@@ -1,0 +1,654 @@
+
+const int Led1 = 10;
+const int Led2 = 9;
+const int Led3 = 8;
+const int Led4 = 7;
+const int Led5 = 6;
+const int Led6 = 5;
+const int Led7 = 4;
+const int Led8 = 3;
+const int Led9 = 2;
+const int Buzzer = 11;
+
+const int ledPins[] = {
+  Led1, Led2, Led3, Led4, Led5,
+  Led6, Led7, Led8, Led9
+};
+
+void setup() {
+  for (int i = 0; i < 9; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+
+  pinMode(Buzzer, OUTPUT);
+  offAll();
+}
+
+void loop() {
+  offAll();
+
+  dIntro();
+  delay(100);
+
+  dChar();
+  delay(2000);
+
+  dOutro();
+  delay(10);
+
+  xChar();
+  delay(2000);
+
+  Xtransition();
+  delay(1000);
+
+  qChar();
+  delay(1000);
+
+  cChar();
+  delay(1000);
+
+  ddChar();
+  delay(1000);
+}
+
+// Turn off all LEDs
+void offAll() {
+  for (int i = 0; i < 9; i++) {
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+
+// LED and buzzer helper
+void lightNote(int led, int frequency, int duration) {
+  digitalWrite(led, HIGH);
+  tone(Buzzer, frequency);
+  delay(duration);
+}
+
+void silence(int duration) {
+  noTone(Buzzer);
+  delay(duration);
+}
+
+// Buzzer sweep
+void flashBang() {
+  for (int frequency = 200; frequency <= 2000; frequency += 100) {
+    tone(Buzzer, frequency);
+    delay(5);
+  }
+
+  for (int frequency = 2000; frequency >= 200; frequency -= 150) {
+    tone(Buzzer, frequency);
+    delay(10);
+  }
+
+  noTone(Buzzer);
+  delay(100);
+}
+
+// X transition
+void Xtransition() {
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(Led1, HIGH);
+    digitalWrite(Led2, LOW);
+    digitalWrite(Led3, HIGH);
+    digitalWrite(Led4, LOW);
+    digitalWrite(Led5, HIGH);
+    digitalWrite(Led6, LOW);
+    digitalWrite(Led7, HIGH);
+    digitalWrite(Led8, LOW);
+    digitalWrite(Led9, HIGH);
+
+    tone(Buzzer, 1000);
+    delay(200);
+
+    digitalWrite(Led1, LOW);
+    digitalWrite(Led2, HIGH);
+    digitalWrite(Led3, LOW);
+    digitalWrite(Led4, HIGH);
+    digitalWrite(Led5, HIGH);
+    digitalWrite(Led6, HIGH);
+    digitalWrite(Led7, LOW);
+    digitalWrite(Led8, HIGH);
+    digitalWrite(Led9, LOW);
+
+    tone(Buzzer, 500);
+    delay(200);
+  }
+
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led2, LOW);
+  digitalWrite(Led3, HIGH);
+  digitalWrite(Led4, LOW);
+  digitalWrite(Led5, LOW);
+  digitalWrite(Led6, LOW);
+  digitalWrite(Led7, HIGH);
+  digitalWrite(Led8, LOW);
+  digitalWrite(Led9, HIGH);
+
+  tone(Buzzer, 1500);
+  delay(200);
+
+  offAll();
+  noTone(Buzzer);
+}
+
+// Flow effect 1
+void flow1() {
+  offAll();
+  digitalWrite(Led3, HIGH);
+  tone(Buzzer, 200);
+  delay(100);
+
+  digitalWrite(Led2, HIGH);
+  tone(Buzzer, 250);
+  delay(100);
+
+  digitalWrite(Led1, HIGH);
+  tone(Buzzer, 300);
+  delay(100);
+
+  digitalWrite(Led3, LOW);
+  tone(Buzzer, 350);
+  delay(100);
+
+  digitalWrite(Led2, LOW);
+  tone(Buzzer, 400);
+  delay(100);
+
+  digitalWrite(Led1, LOW);
+  tone(Buzzer, 450);
+  delay(100);
+
+  noTone(Buzzer);
+}
+
+// Flow effect 2
+void flow2() {
+  digitalWrite(Led4, HIGH);
+  tone(Buzzer, 300);
+  delay(100);
+
+  digitalWrite(Led5, HIGH);
+  tone(Buzzer, 350);
+  delay(100);
+
+  digitalWrite(Led6, HIGH);
+  tone(Buzzer, 400);
+  delay(100);
+
+  digitalWrite(Led4, LOW);
+  tone(Buzzer, 450);
+  delay(100);
+
+  digitalWrite(Led5, LOW);
+  tone(Buzzer, 500);
+  delay(100);
+
+  digitalWrite(Led6, LOW);
+  tone(Buzzer, 550);
+  delay(100);
+
+  noTone(Buzzer);
+}
+
+// Flow effect 3
+void flow3() {
+  digitalWrite(Led9, HIGH);
+  tone(Buzzer, 400);
+  delay(100);
+
+  digitalWrite(Led8, HIGH);
+  tone(Buzzer, 450);
+  delay(100);
+
+  digitalWrite(Led7, HIGH);
+  tone(Buzzer, 500);
+  delay(100);
+
+  digitalWrite(Led9, LOW);
+  tone(Buzzer, 550);
+  delay(100);
+
+  digitalWrite(Led8, LOW);
+  tone(Buzzer, 600);
+  delay(100);
+
+  digitalWrite(Led7, LOW);
+  tone(Buzzer, 650);
+  delay(100);
+
+  noTone(Buzzer);
+}
+
+// Race effect 1
+void Race1() {
+  offAll();
+
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led3, HIGH);
+  tone(Buzzer, 5);
+  delay(100);
+
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led6, HIGH);
+  tone(Buzzer, 10);
+  delay(100);
+
+  digitalWrite(Led7, HIGH);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led9, HIGH);
+  tone(Buzzer, 15);
+  delay(100);
+
+  digitalWrite(Led8, HIGH);
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led3, LOW);
+  tone(Buzzer, 20);
+  delay(100);
+
+  digitalWrite(Led4, LOW);
+  digitalWrite(Led6, LOW);
+  digitalWrite(Led2, LOW);
+  tone(Buzzer, 25);
+  delay(100);
+
+  digitalWrite(Led7, LOW);
+  digitalWrite(Led5, LOW);
+  digitalWrite(Led9, LOW);
+  tone(Buzzer, 30);
+  delay(100);
+
+  digitalWrite(Led8, LOW);
+  tone(Buzzer, 35);
+  delay(100);
+
+  noTone(Buzzer);
+  delay(100);
+}
+
+// Race effect 2
+void Race2() {
+  digitalWrite(Led7, HIGH);
+  digitalWrite(Led9, HIGH);
+  tone(Buzzer, 35);
+  delay(100);
+
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led8, HIGH);
+  digitalWrite(Led6, HIGH);
+  tone(Buzzer, 30);
+  delay(100);
+
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led3, HIGH);
+  tone(Buzzer, 25);
+  delay(100);
+
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led7, LOW);
+  digitalWrite(Led9, LOW);
+  tone(Buzzer, 20);
+  delay(100);
+
+  digitalWrite(Led4, LOW);
+  digitalWrite(Led6, LOW);
+  digitalWrite(Led8, LOW);
+  tone(Buzzer, 15);
+  delay(100);
+
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led5, LOW);
+  digitalWrite(Led3, LOW);
+  tone(Buzzer, 10);
+  delay(100);
+
+  digitalWrite(Led2, LOW);
+  tone(Buzzer, 5);
+  delay(100);
+
+  noTone(Buzzer);
+}
+
+// Intro sequence
+void dIntro() {
+  Race1();
+  delay(10);
+
+  Race2();
+  delay(100);
+
+  offAll();
+  delay(100);
+
+  digitalWrite(Led3, HIGH);
+  digitalWrite(Led7, HIGH);
+  tone(Buzzer, 1000);
+  delay(100);
+
+  noTone(Buzzer);
+  delay(200);
+
+  digitalWrite(Led8, HIGH);
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led6, HIGH);
+  tone(Buzzer, 1000);
+  delay(100);
+
+  noTone(Buzzer);
+  delay(200);
+
+  offAll();
+}
+
+// Outro spinning effect
+void dOutro() {
+  for (int spin = 0; spin < 5; spin++) {
+    digitalWrite(Led1, HIGH);
+    digitalWrite(Led2, LOW);
+    digitalWrite(Led3, LOW);
+    digitalWrite(Led4, LOW);
+    digitalWrite(Led5, HIGH);
+    digitalWrite(Led6, LOW);
+    digitalWrite(Led7, LOW);
+    digitalWrite(Led8, LOW);
+    digitalWrite(Led9, HIGH);
+
+    tone(Buzzer, 150);
+    delay(100);
+
+    digitalWrite(Led2, HIGH);
+    digitalWrite(Led8, HIGH);
+    digitalWrite(Led1, LOW);
+    digitalWrite(Led9, LOW);
+
+    tone(Buzzer, 100);
+    delay(100);
+
+    digitalWrite(Led7, HIGH);
+    digitalWrite(Led3, HIGH);
+    digitalWrite(Led2, LOW);
+    digitalWrite(Led8, LOW);
+
+    tone(Buzzer, 50);
+    delay(100);
+
+    digitalWrite(Led4, HIGH);
+    digitalWrite(Led6, HIGH);
+    digitalWrite(Led7, LOW);
+    digitalWrite(Led3, LOW);
+
+    tone(Buzzer, 100);
+    delay(100);
+  }
+
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led9, HIGH);
+  digitalWrite(Led6, LOW);
+  digitalWrite(Led4, LOW);
+
+  tone(Buzzer, 150);
+  delay(100);
+
+  noTone(Buzzer);
+  delay(150);
+
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led8, HIGH);
+  digitalWrite(Led1, LOW);
+  digitalWrite(Led9, LOW);
+
+  tone(Buzzer, 1000);
+  delay(150);
+
+  noTone(Buzzer);
+  delay(100);
+}
+
+// X character effect
+void xChar() {
+  flow1();
+  flow2();
+  flow3();
+
+  offAll();
+  delay(100);
+
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led9, HIGH);
+
+  tone(Buzzer, 1000);
+  delay(100);
+
+  noTone(Buzzer);
+  offAll();
+  delay(200);
+
+  digitalWrite(Led3, HIGH);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led7, HIGH);
+
+  tone(Buzzer, 1000);
+  delay(100);
+
+  noTone(Buzzer);
+  offAll();
+  delay(100);
+
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led3, HIGH);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led7, HIGH);
+  digitalWrite(Led9, HIGH);
+
+  flashBang();
+}
+
+// Diagonal character
+void dChar() {
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led9, HIGH);
+
+  flashBang();
+}
+
+// Square: intro, melody, flash, outro
+void qChar() {
+  offAll();
+
+  int square[] = {
+    Led1, Led2, Led3, Led6,
+    Led9, Led8, Led7, Led4
+  };
+
+  int notes[] = {
+    262, 330, 392, 440,
+    523, 440, 392, 330
+  };
+
+  // INTRO: corner flashes
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Led1, HIGH);
+    digitalWrite(Led3, HIGH);
+    digitalWrite(Led7, HIGH);
+    digitalWrite(Led9, HIGH);
+
+    tone(Buzzer, 700 + i * 150);
+    delay(100);
+
+    offAll();
+    delay(70);
+  }
+
+  // MAIN: build square
+  for (int i = 0; i < 8; i++) {
+    lightNote(square[i], notes[i], 120);
+  }
+
+  silence(150);
+
+  // FLASH: blink square
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 8; j++) {
+      digitalWrite(square[j], LOW);
+    }
+
+    tone(Buzzer, 900);
+    delay(100);
+
+    for (int j = 0; j < 8; j++) {
+      digitalWrite(square[j], HIGH);
+    }
+
+    tone(Buzzer, 1200);
+    delay(100);
+  }
+
+  // OUTRO: chase around square
+  for (int i = 7; i >= 0; i--) {
+    digitalWrite(square[i], LOW);
+    tone(Buzzer, 500 + i * 80);
+    delay(70);
+  }
+
+  // Restore square
+  for (int i = 0; i < 8; i++) {
+    digitalWrite(square[i], HIGH);
+  }
+
+  noTone(Buzzer);
+}
+
+// Corners: intro, alternating flashes, outro
+void cChar() {
+  offAll();
+
+  int corners[] = {Led1, Led3, Led7, Led9};
+  int notes[] = {523, 659, 784, 1047};
+
+  // INTRO: corners activate one by one
+  for (int i = 0; i < 4; i++) {
+    lightNote(corners[i], notes[i], 120);
+  }
+
+  silence(150);
+
+  // MAIN: alternate opposite corners
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(Led1, HIGH);
+    digitalWrite(Led9, HIGH);
+    digitalWrite(Led3, LOW);
+    digitalWrite(Led7, LOW);
+
+    tone(Buzzer, 700 + i * 100);
+    delay(120);
+
+    digitalWrite(Led1, LOW);
+    digitalWrite(Led9, LOW);
+    digitalWrite(Led3, HIGH);
+    digitalWrite(Led7, HIGH);
+
+    tone(Buzzer, 1000 - i * 100);
+    delay(120);
+  }
+
+  // FLASH: all corners
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      digitalWrite(corners[j], LOW);
+    }
+
+    tone(Buzzer, 1200);
+    delay(80);
+
+    for (int j = 0; j < 4; j++) {
+      digitalWrite(corners[j], HIGH);
+    }
+
+    tone(Buzzer, 800);
+    delay(80);
+  }
+
+  // OUTRO: corners turn off in reverse
+  for (int i = 3; i >= 0; i--) {
+    digitalWrite(corners[i], LOW);
+    tone(Buzzer, 600 + i * 150);
+    delay(100);
+  }
+
+  // Restore corners
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(corners[i], HIGH);
+  }
+
+  noTone(Buzzer);
+}
+
+// Diamond: intro, rhythmic chase, flash, outro
+void ddChar() {
+  offAll();
+
+  int diamond[] = {Led2, Led4, Led6, Led8};
+  int notes[] = {392, 523, 659, 784};
+
+  // INTRO: diamond points appear
+  for (int i = 0; i < 4; i++) {
+    lightNote(diamond[i], notes[i], 150);
+  }
+
+  silence(150);
+
+  // MAIN: alternate diamond points
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(Led2, HIGH);
+    digitalWrite(Led6, HIGH);
+    digitalWrite(Led4, LOW);
+    digitalWrite(Led8, LOW);
+
+    tone(Buzzer, 600 + i * 100);
+    delay(130);
+
+    digitalWrite(Led2, LOW);
+    digitalWrite(Led6, LOW);
+    digitalWrite(Led4, HIGH);
+    digitalWrite(Led8, HIGH);
+
+    tone(Buzzer, 900 - i * 100);
+    delay(130);
+  }
+
+  // FLASH: blink diamond
+  for (int i = 0; i < 5; i++) {
+    offAll();
+
+    tone(Buzzer, 1000 + i * 100);
+    delay(80);
+
+    for (int j = 0; j < 4; j++) {
+      digitalWrite(diamond[j], HIGH);
+    }
+
+    tone(Buzzer, 700 + i * 100);
+    delay(100);
+  }
+
+  // OUTRO: points disappear one by one
+  for (int i = 3; i >= 0; i--) {
+    digitalWrite(diamond[i], LOW);
+    tone(Buzzer, 500 + i * 120);
+    delay(100);
+  }
+
+  // Restore diamond
+  for (int i = 0; i < 4; i++) {
+    digitalWrite(diamond[i], HIGH);
+  }
+
+  noTone(Buzzer);
+}
